@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Login } from "./components/login";
-import { loginFetch, signUpFetch, tokenCheck } from "./utils";
+import { signUpFetch, tokenCheck } from "./utils";
 import './App.css';
 
 const App = () => {
@@ -28,23 +28,21 @@ const App = () => {
     setUser(returnValue.user.username);
   };
 
-  const loginHandler = async (e) => {
-    e.preventDefault();
-    const returnValue = await loginFetch(username, password);
-    setUser(returnValue.user.username); 
-  };
   
   return (
     <div className="App">
       <h1>Snapify</h1>
       <h2>{user}</h2>
       {!user ? (
-      <form onSubmit={signUpHandler}>
-        <input onChange={(e) => setUsername(e.target.value)} placeholder="Username" type="text"></input>
-        <input onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email"></input>
-        <input onChange={(e) => setPassword(e.target.value)} placeholder="Password" type="password"></input>
-        <button type="submit">Submit</button>
-      </form>
+        <>
+          <h2>Register</h2>
+          <form onSubmit={signUpHandler}>
+            <input onChange={(e) => setUsername(e.target.value)} placeholder="Username" type="text"></input>
+            <input onChange={(e) => setEmail(e.target.value)} placeholder="Email" type="email"></input>
+            <input onChange={(e) => setPassword(e.target.value)} placeholder="Password" type="password"></input>
+            <button type="submit">Submit</button>
+          </form>
+        </>
       ) : (
         <>
           <h2>New Posts</h2>

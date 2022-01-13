@@ -31,7 +31,7 @@ export const tokenCheck = async (token, setter) => {
     }
 };
 
-export const loginFetch = async (username, email, password) => {
+export const loginFetch = async (username, password) => {
     try {
         const response = await fetch(`${process.env.REACT_APP_REST_API}user/login`, {
             method: "POST",
@@ -49,7 +49,6 @@ export const loginFetch = async (username, email, password) => {
     }
 };
 
-/*
 export const updateFetch = async (username, email, password) => {
     try {
         const response = await fetch(`${process.env.REACT_APP_REST_API}user`, {
@@ -68,16 +67,14 @@ export const updateFetch = async (username, email, password) => {
     }
 };
 
-/*
-export const deleteFetch = async (username, email, password) => {
+
+export const deleteFetch = async (username) => {
     try {
         const response = await fetch(`${process.env.REACT_APP_REST_API}user/:username`, {
             method: "DELETE",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 username,
-                email,
-                password
             })
         })
         const data = await response.json();
@@ -86,4 +83,3 @@ export const deleteFetch = async (username, email, password) => {
         console.log(error)
     }
 };
-*/
