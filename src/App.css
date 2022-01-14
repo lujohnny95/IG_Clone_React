@@ -5,3 +5,10 @@
 .post-img {
   width: 60vh;
 }
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+
+

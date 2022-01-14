@@ -1,4 +1,4 @@
-export const signUpFetch = async (username, email, password) => {
+export const signUpFetch = async (username, email, password, setUser) => {
     try {
         const response = await fetch(`${process.env.REACT_APP_REST_API}user`, {
             method: "POST",
@@ -10,18 +10,18 @@ export const signUpFetch = async (username, email, password) => {
             })
         })
         const data = await response.json();
+        setUser(data.user.username);
         localStorage.setItem("MyToken", data.token);
-        return data;
     } catch (error) {
         console.log(error)
     }
 };
 
-export const tokenCheck = async (token, setter) => {
+export const tokenCheck = async (setUser) => {
     try {
         const response = await fetch(`${process.env.REACT_APP_REST_API}user`, {
             method: "GET",
-            headers: {"Content-Type": "application/json"},
+            headers: {"Authorization": `Bearer ${localStorage.getItem("token")}`},
         })
         const data = await response.json();
         localStorage.getItem("MyToken", data.token);
@@ -31,7 +31,7 @@ export const tokenCheck = async (token, setter) => {
     }
 };
 
-export const loginFetch = async (username, password) => {
+export const loginFetch = async (username, password, setUser) => {
     try {
         const response = await fetch(`${process.env.REACT_APP_REST_API}user/login`, {
             method: "POST",
@@ -42,8 +42,8 @@ export const loginFetch = async (username, password) => {
             })
         })
         const data = await response.json();
+        setUser(data.user.username)
         localStorage.setItem("MyToken", data.token);
-        return data;
     } catch (error) {
         console.log(error)
     }
@@ -78,6 +78,7 @@ export const deleteFetch = async (username) => {
             })
         })
         const data = await response.json();
+        localStorage.removeItem("MyToken", data.token);
         return data;
     } catch (error) {
         console.log(error)
